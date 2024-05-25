@@ -24,6 +24,7 @@ function Create ({ BASEURL, setCount }) {
             setOk(false)
             title.current.value = ''
             content.current.value = ''
+            setOpen(!open)
           }, 1000)
         }
       })

@@ -42,7 +42,7 @@ function Lists ({ BASEURL, count, setCount, year }) {
     e.preventDefault()
     let result = window.prompt('本当に削除していいですか？')
     if (result) {
-      if (result !== year) {
+      if (parseInt(result) !== year) {
         return
       }
       axios
@@ -93,17 +93,14 @@ function Lists ({ BASEURL, count, setCount, year }) {
                     </Link>
                   </td>
                   <td className='td3'>
-                    <button
-                      onClick={e => deleteOne(e, v.id)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        padding: 0,
-                        cursor: 'pointer'
+                    <a
+                      href='https://example.com'
+                      onClick={e => {
+                        deleteOne(e, v.id)
                       }}
                     >
                       <FiDelete />
-                    </button>
+                    </a>
                   </td>
                 </tr>
               )

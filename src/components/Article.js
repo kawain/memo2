@@ -7,14 +7,15 @@ function Article ({ BASEURL }) {
   const params = useParams()
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
+  const [content, setContent] = useState('')
 
   const fetchAll = useCallback(() => {
     axios
       .get(`${BASEURL}index.php?id=${params.id}`)
       .then(res => {
         setPosts(res.data)
+        setContent(res.data.content) // 初期コンテンツを設定
         setLoading(true)
-        console.log(res.data)
       })
       .catch(error => {
         console.log(error)
@@ -24,6 +25,10 @@ function Article ({ BASEURL }) {
   useEffect(() => {
     fetchAll()
   }, [fetchAll])
+
+  const handleInput = e => {
+    setContent(e.target.innerText)
+  }
 
   return (
     <>
@@ -39,8 +44,13 @@ function Article ({ BASEURL }) {
             </Link>
           </div>
 
-          <pre className='code' contentEditable='true'>
-            <code>{posts.content}</code>
+          <pre
+            className='code'
+            contentEditable='true'
+            suppressContentEditableWarning={true}
+            onInput={handleInput}
+          >
+            <code>{content}</code>
           </pre>
 
           <div className='back'>
