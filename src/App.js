@@ -11,7 +11,7 @@ const now = new Date()
 // 皇紀
 const year = now.getFullYear() + 660
 
-function App () {
+function App() {
   // 画面更新用
   const [count, setCount] = useState(0)
 
